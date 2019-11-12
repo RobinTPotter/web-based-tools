@@ -6,7 +6,7 @@ print('open http://localhost:12345/gameboy_tiles_maker.html')
 
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 
-class StoreHandler(SimpleHTTPRequestHandler):
+class StorageHandler(SimpleHTTPRequestHandler):
     """A tweak to Simple Handler if POST to save then dangerously save data to file."""
 
     def do_POST(self):
@@ -21,5 +21,5 @@ class StoreHandler(SimpleHTTPRequestHandler):
             self.send_response(200)
 
 
-server = HTTPServer(('', 12345), StoreHandler)
+server = HTTPServer(('', 12345), StorageHandler)
 server.serve_forever()
