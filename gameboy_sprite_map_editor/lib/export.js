@@ -19,7 +19,7 @@ function export_map() {
         if (tt!=0) exp = exp + ',\n'
         exp = exp + '   ' + things[tt].join(',')
     }
-    exp =exp + '\n}'
+    exp =exp + '\n};\n\n'
 
     popup_open(exp)
 }
@@ -57,7 +57,7 @@ function export_sprites() {
             exp = exp + '   ' + all[aa].join(',')
     }
 
-    exp = exp + '\n}\n'
+    exp = exp + '\n};\n\n'
     popup_open(exp)
 }
 

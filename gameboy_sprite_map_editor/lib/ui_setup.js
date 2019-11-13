@@ -1,9 +1,10 @@
     
 function setup_sprite_ui() {
 
+    var sprite_panel = d3.select('body').append('div')
 
 
-    d3.select('body').append('img')
+    sprite_panel.append('img')
         .attr('id','colours')
         .attr('src','colours.png')
         .attr('width','128')
@@ -11,11 +12,11 @@ function setup_sprite_ui() {
         .style('border','solid')
         .style('border-width','1px')
 
-        d3.select('body').append('canvas')
+    sprite_panel.append('canvas')
         .attr('width','4')
         .attr('height','32')
 
-        d3.select('body').append('canvas')
+    sprite_panel.append('canvas')
         .attr('id','current_colour')
         .attr('width','32')
         .attr('height','32')
@@ -24,7 +25,7 @@ function setup_sprite_ui() {
 
     
 
-        d3.select('body').append('canvas')
+    sprite_panel.append('canvas')
         .attr('id','temp_canvas')
         .attr('width','8')
         .attr('height','8')
@@ -33,7 +34,7 @@ function setup_sprite_ui() {
         .style('visibility','hidden')
 
 
-        d3.select('body').append('canvas')
+    sprite_panel.append('canvas')
         .attr('id','temp_canvas_sprite')
         .attr('width','8')
         .attr('height','8')
@@ -41,50 +42,50 @@ function setup_sprite_ui() {
         .style('border-width','1px')
         .style('visibility','hidden')
         
-        d3.select('body').append('br')
-        d3.select('body').append('br')
+        sprite_panel.append('br')
+        sprite_panel.append('br')
 
-    sprite_edge_selection = d3.select('body').append('div')
+    sprite_edge_selection = sprite_panel.append('div')
         .attr('id','sprite_edge')
         .style('border','solid')
         .style('border-width','1px')
         .style('width',`${SW * SCHO+2}px`)
         .style('height',`${SH * SCHO+2}px`)
         
-    d3.select('body').append('hr')
+        sprite_panel.append('hr')
 
-        d3.select('body').append('input')
+        sprite_panel.append('input')
         .attr('id','new_sprite_button')
         .attr('type','button')
         .on('click',add_new_sprite)
         .attr('value','new')
 
-        d3.select('body').append('input')
+        sprite_panel.append('input')
         .attr('id','copy_current_sprite')
         .attr('type','button')
         .on('click',copy_current_sprite)
         .attr('value','copy')
 
 
-        d3.select('body').append('input')
+        sprite_panel.append('input')
         .attr('id','clear_current_sprite')
         .attr('type','button')
         .on('click',clear_current_sprite)
         .attr('value','clear')
 
-        d3.select('body').append('input')
+        sprite_panel.append('input')
         .attr('id','delete_current_sprite')
         .attr('type','button')
         .on('click',delete_current_sprite)
         .attr('value','delete')
 
-        d3.select('body').append('input')
+        sprite_panel.append('input')
         .attr('id','export_sprites')
         .attr('type','button')
         .on('click',export_sprites)
         .attr('value','export')
 
-    current_sprite_canvas = d3.select('body').append('canvas')
+    current_sprite_canvas = sprite_panel.append('canvas')
         .attr('id','current_sprite_canvas')
         .attr('width',`${SW * SCHO}`)
         .attr('height',`${SH * SCHO}`)
