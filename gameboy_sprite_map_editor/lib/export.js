@@ -10,10 +10,10 @@ function export_map() {
     }
 
     var exp = ''
-    +'#define XXXWidth '+W+'\n'
-    +'#define XXXHeight '+H+'\n'
-    +'#define XXXBank 0\n'
-    +'\nunsigned char XXX[] =\n'
+    +'#define MAP_NAME_Width '+W+'\n'
+    +'#define MAP_NAME_Height '+H+'\n'
+    +'#define MAP_NAME_Bank 0\n'
+    +'\nunsigned char MAP_NAME_[] =\n'
     +'{\n'
     for (var tt=0;tt<things.length;tt++) {
         if (tt!=0) exp = exp + ',\n'
@@ -76,7 +76,7 @@ function sprites_export_gbdk() {
 }
 
 function export_sprites() {
-    var exp = 'unsigned char XXX[] =\n{\n'
+    var exp = 'unsigned char SPRITES_[] =\n{\n'
     var all = sprites_export_gbdk()
     for (var aa=0;aa<all.length;aa++) {
             if (aa!=0) exp = exp + ',\n'
@@ -127,7 +127,7 @@ function save() {
     var xhr = new XMLHttpRequest()
     xhr.open("POST", 'save', true)
     xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.send(JSON.stringify({"sprites": current_sprites, "map": current_map }))
+    xhr.send(JSON.stringify({"file": filename.node().value ,"sprites": current_sprites, "map": current_map }))
 }
 
 function test(callback) {
@@ -168,6 +168,6 @@ function load() {
         // end of state change: it can be after some time (async)
     };
     
-    xhr.open('GET', 'save.json', true);
+    xhr.open('GET', filename.node().value, true);
     xhr.send();
 }

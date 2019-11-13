@@ -4,6 +4,7 @@
 
 print('open http://localhost:12345/gameboy_tiles_maker.html')
 
+import json, os
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 
 class StorageHandler(SimpleHTTPRequestHandler):
@@ -14,8 +15,9 @@ class StorageHandler(SimpleHTTPRequestHandler):
         if self.path == '/save':
             length = self.headers['content-length']
             data = self.rfile.read(int(length))
-
-            with open('save.json', 'w') as fh:
+            filename = json.loads(data)['file']
+            if os.path.isfile(filename): return
+            with open(filename, 'w') as fh:
                 fh.write(data.decode())
 
             self.send_response(200)

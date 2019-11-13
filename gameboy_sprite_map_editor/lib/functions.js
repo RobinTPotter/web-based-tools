@@ -19,6 +19,9 @@ function main() {
         .on('click', load)
         .attr('value','load')
 
+    filename = d3.select('body').append('input').attr('id','filename').attr('type','textbox')
+    filename.node().value = 'save.json'
+
     notice = d3.select('body').append('span')
         .attr('id','notice')
         .attr('type','button')
@@ -30,6 +33,7 @@ function main() {
         if (d=='') {
             load_button.node().disabled=true
             save_button.node().disabled=true
+            filename.node().disabled=true
             notice.style('visibility', 'visible')
         }
     })

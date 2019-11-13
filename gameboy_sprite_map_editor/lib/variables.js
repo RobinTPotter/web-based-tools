@@ -38,3 +38,4 @@ var popup_button_area, popup_ok_button, popup_copy_button
 var save_button
 var load_button
 var notice
+var filename
