@@ -22,8 +22,9 @@ function main() {
     notice = d3.select('body').append('span')
         .attr('id','notice')
         .attr('type','button')
-        .attr('text','< enabled if ran locally, see README.md')
+        .text('< enabled if ran locally, see README.md')
         .style('visibility','hidden')
+        .on('click',function() { d3.select(this).style('visibility','hidden') })
 
     test(function(d) {
         if (d=='') {
