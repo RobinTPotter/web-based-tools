@@ -122,12 +122,32 @@ function old_export_sprites() {
     popup_open(thing )    
 }
 
+
 function save() {
     var xhr = new XMLHttpRequest()
     xhr.open("POST", 'save', true)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify({"sprites": current_sprites, "map": current_map }))
 }
+
+function test(callback) {
+    var xhr = new XMLHttpRequest()
+    xhr.open("POST", 'test', true)
+    xhr.onreadystatechange = function () {
+        if (this.readyState != 4) return;    
+        if (this.status == 200) {
+            var data = this.responseText;
+            //console.log("inside", data)
+            callback(data)
+        }    
+    };    
+
+    xhr.responseType = 'text'
+    xhr.setRequestHeader('Content-Type', 'plain/text')
+    xhr.send(JSON.stringify({"test": true }))
+}
+
+
 function load() {
     var xhr = new XMLHttpRequest();
     // we defined the xhr

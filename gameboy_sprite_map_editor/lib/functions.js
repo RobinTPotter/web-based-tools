@@ -6,18 +6,32 @@ function main() {
     current_sprite_index = current_sprites.length-1
 
 
-    d3.select('body').append('input')
+    save_button = d3.select('body').append('input')
         .attr('id','save')
         .attr('type','button')
         .on('click', save)
         .attr('value','save')
 
 
-    d3.select('body').append('input')
+        load_button = d3.select('body').append('input')
         .attr('id','load')
         .attr('type','button')
         .on('click', load)
         .attr('value','load')
+
+    notice = d3.select('body').append('span')
+        .attr('id','notice')
+        .attr('type','button')
+        .attr('text','< enabled if ran locally, see README.md')
+        .style('visibility','hidden')
+
+    test(function(d) {
+        if (d=='') {
+            load_button.node().disabled=true
+            save_button.node().disabled=true
+            notice.style('visibility', 'visible')
+        }
+    })
 
     d3.select('body').append('hr')
 

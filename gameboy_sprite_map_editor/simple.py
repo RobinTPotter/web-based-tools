@@ -19,6 +19,11 @@ class StorageHandler(SimpleHTTPRequestHandler):
                 fh.write(data.decode())
 
             self.send_response(200)
+        else:
+            print('hohoho')
+            self.send_response(200)
+            self.end_headers()       
+            self.wfile.write(b'Hi!')
 
 
 server = HTTPServer(('', 12345), StorageHandler)

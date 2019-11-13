@@ -34,3 +34,7 @@ var sprite_edge_selection
 var popup
 var popup_inside, popup_inside_text
 var popup_button_area, popup_ok_button, popup_copy_button
+
+var save_button
+var load_button
+var notice
