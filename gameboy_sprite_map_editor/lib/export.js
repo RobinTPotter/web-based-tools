@@ -134,12 +134,13 @@ function test(callback) {
     var xhr = new XMLHttpRequest()
     xhr.open("POST", 'test', true)
     xhr.onreadystatechange = function () {
+        var data = ''
         if (this.readyState != 4) return;    
         if (this.status == 200) {
-            var data = this.responseText;
+            data = this.responseText;
             //console.log("inside", data)
-            callback(data)
-        }    
+        }
+        callback(data)           
     };    
 
     xhr.responseType = 'text'
