@@ -27,23 +27,49 @@ function sprites_export_gbdk() {
     var all = []
     for (var cs=0; cs<current_sprites.length;cs++) {
         var output = []
+        var spr = current_sprites[cs]
         for (var y=0;y<SH;y++) {
-            var stuff = current_sprites[cs].filter(function(m) { if (m.y==y) return m })
-                .sort(function(a,b) { if( a.x>b.x) return 1;else -1})   
-                
-            var o=0, x=0
-            for (var b=0;b<SW/2;b++,x++) {
-                var bits = stuff[x].value<<2*(SW/2-b-1)
-                o = o | bits
+            byte1 = 0
+            byte2 = 0
+            for (var x=0;x<SH;x++) {
+                var bit_low = 0
+                var bit_high = 0
+                var cell = spr.filter(function(m) { if (m.y==y && m.x==x) return m })[0]
+                if (cell.value==3) {
+                    bit_low = 1
+                    bit_high = 1
+                } else if (cell.value==2) {
+                    bit_low = 0
+                    bit_high = 1
+                } else if (cell.value==1) {
+                    bit_low = 1
+                    bit_high = 0
+                }
+                byte1 = byte1 | (bit_low << ( SW - x -1 ))
+                byte2 = byte2 | (bit_high << ( SW - x -1  ))
             }
-            output.push('0x'+('0'+o.toString(16)).slice(-2))
-            o = 0
-            for (var b=0;b<SW/2;b++,x++) {
-                var bits = stuff[x].value<<2*(SW/2-b-1)
-                o = o | bits
-            }
-            output.push('0x'+('0'+o.toString(16)).slice(-2))
+            console.log(byte1.toString(2))
+            console.log(byte2.toString(2))
+            output.push('0x'+('0'+byte1.toString(16)).slice(-2))
+            output.push('0x'+('0'+byte2.toString(16)).slice(-2))
         }
+        //for (var y=0;y<SH;y++) {
+        //    var stuff = current_sprites[cs].filter(function(m) { if (m.y==y) return m })
+        //        .sort(function(a,b) { if( a.x>b.x) return 1;else -1})   
+        //        
+        //    var o=0, x=0
+        //    for (var b=0;b<SW/2;b++,x++) {
+        //        var bits = stuff[x].value<<2*(SW/2-b-1)
+        //        o = o | bits
+        //    }
+        //    output.push('0x'+('0'+o.toString(16)).slice(-2))
+        //    o = 0
+        //    for (var b=0;b<SW/2;b++,x++) {
+        //        var bits = stuff[x].value<<2*(SW/2-b-1)
+        //        o = o | bits
+        //    }
+        //    output.push('0x'+('0'+o.toString(16)).slice(-2))
+        //}
         all.push(output)
     }
     return all
