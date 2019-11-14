@@ -39,3 +39,5 @@ var save_button
 var load_button
 var notice
 var filename
+
+var map_stack = []

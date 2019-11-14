@@ -37,3 +37,40 @@ function setup_map_ui_action() {
         update_sprite_canvas()
     })
 }
+
+function clear_map() {
+    current_map = []
+    initialize_map()
+    update_map_canvas()
+}
+
+function pop_map() {
+    if (map_stack.length==0) return
+    current_map = map_stack.pop()
+    update_map_canvas()
+    update_stack()
+}
+
+function push_map() {
+    map_stack.push(current_map)
+    current_map = []
+    initialize_map()
+    update_map_canvas()
+    update_stack()
+}
+
+function cycle_map() {
+    map_stack.unshift(map_stack.pop())
+    update_stack()
+}
+
+
+function update_stack() {
+    //TODO - show thumbnails of maps in stack
+    //need to create the ui component
+    //shrink canvas? 
+    //blit
+
+
+
+}
