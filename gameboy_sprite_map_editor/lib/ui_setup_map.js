@@ -99,5 +99,9 @@ function setup_map_ui() {
         .on('click',cycle_map)
         .attr('value','cycle')
 
+    stack_canvas = d3.select('body').append('canvas')
+        .attr('id','stack_canvas')
+
+
 
 }

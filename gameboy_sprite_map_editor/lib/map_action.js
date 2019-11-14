@@ -46,13 +46,19 @@ function clear_map() {
 
 function pop_map() {
     if (map_stack.length==0) return
-    current_map = map_stack.pop()
+    current_map = map_stack.pop().map
     update_map_canvas()
     update_stack()
 }
 
 function push_map() {
-    map_stack.push(current_map)
+
+    var im = new Image(CHO*W, CHO*H)
+    im.src = current_map_canvas.node().toDataURL();    
+    im.id = "i"+map_stack.length
+    im.style = "visibility: hidden"
+    document.body.appendChild(im)
+    map_stack.push({"map": current_map, "image": im} )
     current_map = []
     initialize_map()
     update_map_canvas()
@@ -70,7 +76,15 @@ function update_stack() {
     //need to create the ui component
     //shrink canvas? 
     //blit
+    stack_canvas.style('width',`${128 * map_stack.length}`)
+    stack_canvas.style('height',`${128}`)
+    
+    var ctx = document.getElementById('stack_canvas').getContext('2d')
 
+    for (var m=0;m<map_stack.length;m++) {
+       // console.log(map_stack[m].image)
+        ctx.drawImage(  document.getElementById('i'+m) , 0, 0, CHO*W, CHO*H, m*128, 0, 128, 128 )
+    }
 
 
 }

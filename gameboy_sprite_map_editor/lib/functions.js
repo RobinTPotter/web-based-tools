@@ -87,5 +87,7 @@ function main() {
     sprite = current_sprites[current_sprite_index]
     add_new_sprite()
     update_tiles_source()
+    d3.select('body').append('br')
+    d3.select('body').append('br')
 
 }

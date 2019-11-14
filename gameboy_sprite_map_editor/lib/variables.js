@@ -41,3 +41,4 @@ var notice
 var filename
 
 var map_stack = []
+var stack_canvas
