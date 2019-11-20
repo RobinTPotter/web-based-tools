@@ -42,7 +42,6 @@ function add_new_sprite() {
     sprite = current_sprites[current_sprite_index]
     if (tiles_source) update_tiles_source()
     update_sprite_canvas()
-    call_layout()
 }
 
 function copy_current_sprite() {
@@ -122,6 +121,7 @@ function update_sprite_canvas(s) {
         
     })
     update_tiles_source()
+    call_layout()
 }
 
 
