@@ -42,6 +42,7 @@ function add_new_sprite() {
     sprite = current_sprites[current_sprite_index]
     if (tiles_source) update_tiles_source()
     update_sprite_canvas()
+    call_layout()
 }
 
 function copy_current_sprite() {
@@ -60,6 +61,7 @@ function dup_sprites() {
     }
     if (tiles_source) update_tiles_source()
     update_sprite_canvas()
+    call_layout()
 }
 
 function nudgeL() {
@@ -90,6 +92,7 @@ function delete_current_sprite() {
     console.log("deleted",current_sprites)
     if (tiles_source) update_tiles_source()
     update_sprite_canvas()
+    call_layout()
 }
 
 function clear_current_sprite() {
