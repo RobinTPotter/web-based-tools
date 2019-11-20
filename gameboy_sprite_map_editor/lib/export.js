@@ -127,7 +127,12 @@ function save() {
     var xhr = new XMLHttpRequest()
     xhr.open("POST", 'save', true)
     xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.send(JSON.stringify({"file": filename.node().value ,"sprites": current_sprites, "map": current_map, "stack": map_stack }))
+    xhr.send(JSON.stringify(
+        {"file": filename.node().value,
+        "sprites": current_sprites,
+        "map": current_map,
+        "stack": map_stack }
+        ))
 }
 
 function test(callback) {
@@ -163,6 +168,7 @@ function load() {
             if (data.stack) map_stack = data.stack
             update_sprite_canvas() //first!
             setTimeout(update_map_canvas, 100)
+            setTimeout(update_stack, 100)
             // we get the returned data
         }
     
@@ -171,4 +177,6 @@ function load() {
     
     xhr.open('GET', filename.node().value, true);
     xhr.send();
+
+
 }

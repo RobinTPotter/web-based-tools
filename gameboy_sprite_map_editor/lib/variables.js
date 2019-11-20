@@ -1,6 +1,6 @@
 
-var W = 40
-var H = 40
+var W = 32
+var H = 32
 var CHO = 8
 
 var SW = 8

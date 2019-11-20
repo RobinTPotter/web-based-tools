@@ -67,6 +67,13 @@ function setup_map_ui() {
 
         
         d3.select('body').append('hr')
+
+        stack_canvas = d3.select('body').append('canvas')
+            .attr('id','stack_canvas')
+            .attr('width',`${64}`)
+            .attr('height',`${64}`)
+
+        d3.select('body').append('br')
         
         d3.select('body').append('input')
         .attr('id','clear_map')
@@ -99,9 +106,7 @@ function setup_map_ui() {
         .on('click',cycle_map)
         .attr('value','cycle')
 
-    stack_canvas = d3.select('body').append('canvas')
-        .attr('id','stack_canvas')
 
 
-
+        
 }

@@ -7,9 +7,10 @@ function initialize_map() {
             current_map.push({"x":x,"y":y, "value":0})
         }
     }
+    console.log('inititalized map')
 }
 
-function update_map_canvas() {
+function update_map_canvas(callback) {
     var ctx = current_map_canvas.node().getContext("2d")
     current_map.forEach(function(cell) {
         //console.log(cell)
@@ -18,6 +19,7 @@ function update_map_canvas() {
         //console.log(cell, cell.value * 8, 0, 8, 8, cell.x*CHO, cell.y*CHO,8,8)
         ctx.drawImage(sprite_list_canvas, cell.value * 8, 0, 8, 8, cell.x * CHO, cell.y * CHO,CHO , CHO);
     })
+    if (callback) callback()
 }
 
 function setup_map_ui_action() {
@@ -42,6 +44,7 @@ function clear_map() {
     current_map = []
     initialize_map()
     update_map_canvas()
+    console.log('cleared')
 }
 
 function pop_map() {
@@ -49,25 +52,28 @@ function pop_map() {
     current_map = map_stack.pop().map
     update_map_canvas()
     update_stack()
+    console.log('popped')
 }
 
-function push_map() {
 
-    var im = new Image(CHO*W, CHO*H)
-    im.src = current_map_canvas.node().toDataURL();    
-    im.id = "i"+map_stack.length
-    im.style = "visibility: hidden"
-    document.body.appendChild(im)
-    map_stack.push({"map": current_map, "image": im} )
+
+
+function push_map() {
+    data = current_map_canvas.node().toDataURL()
+    map_stack.push({"map": current_map, "image": data})
+    console.log('stack now '+map_stack.length)
     current_map = []
     initialize_map()
-    update_map_canvas()
-    update_stack()
+    update_map_canvas(update_stack)
+    console.log('push')
+    setTimeout(update_stack, 100)
+    
 }
 
 function cycle_map() {
     map_stack.unshift(map_stack.pop())
     update_stack()
+    console.log('cycled')
 }
 
 
@@ -76,15 +82,18 @@ function update_stack() {
     //need to create the ui component
     //shrink canvas? 
     //blit
-    stack_canvas.style('width',`${128 * map_stack.length}`)
-    stack_canvas.style('height',`${128}`)
+    stack_canvas.attr('width',`${128 * map_stack.length}`)
+    stack_canvas.attr('height',`${128}`)
     
     var ctx = document.getElementById('stack_canvas').getContext('2d')
 
     for (var m=0;m<map_stack.length;m++) {
        // console.log(map_stack[m].image)
-        ctx.drawImage(  document.getElementById('i'+m) , 0, 0, CHO*W, CHO*H, m*128, 0, 128, 128 )
+       var tmp = new Image(W*CHO,H*CHO)
+       console.log(tmp)
+       tmp.src =  map_stack[m].image
+        ctx.drawImage(  tmp , 0, 0, CHO*W, CHO*H, m*128, 0, 128, 128 )
     }
-
+console.log('update stack picture')
 
 }
