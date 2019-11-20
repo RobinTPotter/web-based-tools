@@ -38,6 +38,10 @@ function setup_map_ui_action() {
         current_sprite_index = current_tile_index
         update_sprite_canvas()
     })
+
+
+
+    
 }
 
 function clear_map() {

@@ -75,6 +75,7 @@ function update_tiles_source() {
 
     //is an image
     tiles_source.attr('width',32*current_sprites.length)
+    tiles_source2.attr('width',32*current_sprites.length)
     var _temp_canvas = document.getElementById('temp_canvas');
     _temp_canvas.width = 8*current_sprites.length
     var ctx = _temp_canvas.getContext("2d")
@@ -85,6 +86,10 @@ function update_tiles_source() {
     //console.log(_temp_canvas, ctx)
     tiles_source.node().crossOrigin = 'anonymous'
     tiles_source.node().src = _temp_canvas.toDataURL()
+    tiles_source2.node().crossOrigin = 'anonymous'
+    tiles_source2.node().src = _temp_canvas.toDataURL()
+
+
 }
 
 
@@ -101,4 +106,21 @@ function setup_sprite_ui_action() {
             ctx.drawImage(colours, colour_index*8, 0, 8, 8,
                 0, 0, 32, 32)
         })
+
+        
+
+    //set up ui actions
+    d3.select('#tiles2').on('mouseup', function() {
+        mx=d3.event.offsetX
+        my=d3.event.offsetY
+        cx=Math.abs(Math.floor(mx/32))
+        cy=Math.abs(Math.floor(my/32))
+        console.log(cx,cy)
+        current_tile_index = cx
+        var ctx = document.getElementById('current_tile').getContext('2d')
+        ctx.drawImage(tiles, current_tile_index*8, 0, 8, 8,
+            0, 0, 32, 32)
+        current_sprite_index = current_tile_index
+        update_sprite_canvas()
+    })
 }

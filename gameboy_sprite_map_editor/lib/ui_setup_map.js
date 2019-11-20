@@ -2,7 +2,11 @@
 
 function setup_map_ui() {
 
-    tiles_source = d3.select('body').append('img')
+    map_panel = d3.select('body').append('div')
+
+    map_panel.append('h2').text('Map Design')
+
+    tiles_source = map_panel.append('img')
         .attr('id','tiles')
         .attr('src','tiles.png')
         .attr('width','160')
@@ -10,21 +14,21 @@ function setup_map_ui() {
         .style('border','solid')
         .style('border-width','1px')
 
-    d3.select('body').append('canvas')
+        map_panel.append('canvas')
         .attr('width','4')
         .attr('height','32')
 
-    d3.select('body').append('canvas')
+        map_panel.append('canvas')
         .attr('id','current_tile')
         .attr('width','32')
         .attr('height','32')
         .style('border','dotted')
         .style('border-width','2px')
 
-        d3.select('body').append('br')
-        d3.select('body').append('br')
+        map_panel.append('br')
+        map_panel.append('br')
 
-    map_edge_selection = d3.select('body').append('div')
+    map_edge_selection = map_panel.append('div')
         .attr('id','map_edge')
         .style('border','solid')
         .style('border-width','1px')
@@ -35,7 +39,7 @@ function setup_map_ui() {
         //.style('posleftition',`${offset_x-2}`)
 
 
-    current_map_canvas = d3.select('body').append('canvas')
+    current_map_canvas = map_panel.append('canvas')
         .attr('id','current_map_canvas')
         .style('position','absolute')
         .attr('width',`${W * CHO}`)
@@ -66,41 +70,46 @@ function setup_map_ui() {
         })
 
         
-        d3.select('body').append('hr')
+        map_panel.append('hr')
 
-        stack_canvas = d3.select('body').append('canvas')
-            .attr('id','stack_canvas')
-            .attr('width',`${64}`)
-            .attr('height',`${64}`)
-
-        d3.select('body').append('br')
         
-        d3.select('body').append('input')
+        map_panel.append('input')
         .attr('id','clear_map')
         .attr('type','button')
         .on('click',clear_map)
         .attr('value','clear')
 
-        d3.select('body').append('input')
+        map_panel.append('input')
         .attr('id','export_map')
         .attr('type','button')
         .on('click',export_map)
         .attr('value','export')
 
-        d3.select('body').append('input')
+        map_panel.append('br')
+
+        stack_panel = d3.select('body').append('div')
+
+        stack_canvas = stack_panel.append('canvas')
+            .attr('id','stack_canvas')
+            .attr('width',`${64}`)
+            .attr('height',`${64}`)
+        
+        stack_panel.append('br')
+        
+        stack_panel.append('input')
         .attr('id','push_map')
         .attr('type','button')
         .on('click',push_map)
         .attr('value','push')
 
-        d3.select('body').append('input')
+        stack_panel.append('input')
         .attr('id','pop_map')
         .attr('type','button')
         .on('click',pop_map)
         .attr('value','pop')
 
 
-        d3.select('body').append('input')
+        stack_panel.append('input')
         .attr('id','cycle_map')
         .attr('type','button')
         .on('click',cycle_map)

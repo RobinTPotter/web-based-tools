@@ -25,6 +25,7 @@ var  current_map = []
 var  current_sprites = []
 
 var tiles_source
+var tiles_source2
 
 var current_sprite_index
 
@@ -42,3 +43,12 @@ var filename
 
 var map_stack = []
 var stack_canvas
+
+var ui_controls
+var panel_map_toggle
+var panel_sprite_toggle
+var panel_stack_toggle
+
+var map_panel
+var sprite_panel
+var stack_panel

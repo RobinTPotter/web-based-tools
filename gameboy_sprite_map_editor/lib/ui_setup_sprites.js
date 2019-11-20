@@ -1,8 +1,9 @@
     
 function setup_sprite_ui() {
 
-    var sprite_panel = d3.select('body').append('div')
+    sprite_panel = d3.select('body').append('div')
 
+    sprite_panel.append('h2').text('Sprite Design')
 
     sprite_panel.append('img')
         .attr('id','colours')
@@ -42,8 +43,13 @@ function setup_sprite_ui() {
         .style('border-width','1px')
         .style('visibility','hidden')
         
-        sprite_panel.append('br')
-        sprite_panel.append('br')
+     
+
+    sprite_panel.append('br')
+    sprite_panel.append('br')
+
+
+
 
     sprite_edge_selection = sprite_panel.append('div')
         .attr('id','sprite_edge')
@@ -52,6 +58,20 @@ function setup_sprite_ui() {
         .style('width',`${SW * SCHO+2}px`)
         .style('height',`${SH * SCHO+2}px`)
         
+
+
+        sprite_panel.append('br')
+    
+    
+        tiles_source2 =     sprite_panel
+        .append('img')
+        .attr('id','tiles2')
+        .attr('src','tiles.png')
+        .attr('width','160')
+        .attr('height','32')
+        .style('border','solid')
+        .style('border-width','1px')
+
         sprite_panel.append('hr')
 
         sprite_panel.append('input')
@@ -118,5 +138,5 @@ function setup_sprite_ui() {
         .on('mouseup',function() {
             update_map_canvas()
         })
-
+    
 }
