@@ -93,10 +93,12 @@ function update_stack() {
 
     for (var m=0;m<map_stack.length;m++) {
        // console.log(map_stack[m].image)
-       var tmp = new Image(W*CHO,H*CHO)
-       console.log(tmp)
-       tmp.src =  map_stack[m].image
-        ctx.drawImage(  tmp , 0, 0, CHO*W, CHO*H, m*128, 0, 128, 128 )
+       if (map_stack[m]) {
+        var tmp = new Image(W*CHO,H*CHO)
+        console.log(tmp)
+        tmp.src =  map_stack[m].image
+            ctx.drawImage(  tmp , 0, 0, CHO*W, CHO*H, m*128, 0, 128, 128 )
+        }
     }
 console.log('update stack picture')
 

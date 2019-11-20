@@ -100,6 +100,44 @@ function setup_sprite_ui() {
         .attr('value','delete')
 
         sprite_panel.append('input')
+        .attr('id','cycle_sprites')
+        .attr('type','button')
+        .on('click',cycle_sprites)
+        .attr('value','cycle')
+
+        
+        sprite_panel.append('br')
+
+        sprite_panel.append('input')
+        .attr('id','rotate')
+        .attr('type','button')
+        .on('click',rotate_sprite)
+        .attr('value','rotate')
+
+        sprite_panel.append('input')
+        .attr('id','flip')
+        .attr('type','button')
+        .on('click',flip_x_sprite)
+        .attr('value','flip')
+
+        sprite_panel.append('input')
+        .attr('id','nudgeL')
+        .attr('type','button')
+        .on('click',nudgeL)
+        .attr('value','<nudge')
+
+        sprite_panel.append('input')
+        .attr('id','nudgeR')
+        .attr('type','button')
+        .on('click',nudgeR)
+        .attr('value','nudge>')
+
+
+
+
+        sprite_panel.append('br')
+
+        sprite_panel.append('input')
         .attr('id','export_sprites')
         .attr('type','button')
         .on('click',export_sprites)
@@ -138,5 +176,37 @@ function setup_sprite_ui() {
         .on('mouseup',function() {
             update_map_canvas()
         })
-    
+
+
+        sprite_panel.append('br')
+
+        tes_canvas_3x3 = sprite_panel.append('canvas')
+        .attr('id','tes_canvas_3x3')
+        .attr('width',`${3 * SW *2}`)
+        .attr('height',`${3 * SH *2}`)
+        .style('margin','10px')
+
+        sprite_panel.append('br')
+
+        tes_canvas_2x2 = sprite_panel.append('canvas')
+        .attr('id','tes_canvas_2x2')
+        .attr('width',`${2 * SW*2 }`)
+        .attr('height',`${2 * SH *2}`)  
+
+        sprite_panel.append('br')
+
+        sprite_panel.append('input').attr('type','number').attr('min',0).style('width','50px').attr('value',0).on('click',function(){
+            tes_sprite_index = Number(d3.select(this).node().value)
+            update_tiles_source()
+        })
+
+        sprite_panel.append('input')
+        .attr('id','dup_sprites')
+        .attr('type','button')
+        .on('click',dup_sprites)
+        .attr('value','dupe')
+
+      
+
+
 }

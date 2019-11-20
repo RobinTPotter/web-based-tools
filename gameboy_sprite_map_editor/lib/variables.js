@@ -27,7 +27,7 @@ var  current_sprites = []
 var tiles_source
 var tiles_source2
 
-var current_sprite_index
+var current_sprite_index = 0
 
 var map_edge_selection
 var sprite_edge_selection
@@ -54,3 +54,7 @@ var sprite_panel
 var stack_panel
 
 var horizontal_panel
+
+var tes_canvas_2x2
+var tes_sprite_index = 0
+var tes_canvas_3x3

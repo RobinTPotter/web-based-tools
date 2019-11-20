@@ -217,6 +217,7 @@ function load() {
             setTimeout(update_map_canvas, 100)
             setTimeout(cycle_map, 100)
             setTimeout(update_stack, 200)
+            setTimeout(call_layout, 200)
             // we get the returned data
         }
     
