@@ -52,3 +52,5 @@ var panel_stack_toggle
 var map_panel
 var sprite_panel
 var stack_panel
+
+var horizontal_panel

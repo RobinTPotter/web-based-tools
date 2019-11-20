@@ -23,6 +23,53 @@ function export_map() {
 
     popup_open(exp)
 }
+
+
+
+function export_stack() {
+    var exp = '//EXPORT_STACK\n'
+
+    for (var mm=0;mm<map_stack.length;mm++) {
+
+        var things = []
+        var mapp = map_stack[mm].map
+
+        for (var y=0;y<H;y++) {
+            var stuff = mapp.filter(function(m) { if (m.y==y) return m })
+                .sort(function(a,b) { if( a.x>b.x) return 1;else -1})
+                
+            var line_as_hex = stuff.map(function(m) { return '0x'+('00'+m.value.toString(16)).slice(-2) })
+            things.push(line_as_hex) 
+            //console.log(thing)
+        }
+
+        exp = exp + ''
+        +'#define MAP_NAME_'+mm+'_Width '+W+'\n'
+        +'#define MAP_NAME_'+mm+'_Height '+H+'\n'
+        +'#define MAP_NAME_'+mm+'_Bank '+ mm +'\n'
+        +'\nunsigned char MAP_NAME_'+mm+'_[] =\n'
+        +'{\n'
+        for (var tt=0;tt<things.length;tt++) {
+            if (tt!=0) exp = exp + ',\n'
+            exp = exp + '   ' + things[tt].join(',')
+        }
+        exp =exp + '\n};\n\n'
+
+    }
+
+    popup_open(exp)
+}
+
+
+
+
+
+
+
+
+
+
+
 function sprites_export_gbdk() {
     var all = []
     for (var cs=0; cs<current_sprites.length;cs++) {
@@ -48,8 +95,8 @@ function sprites_export_gbdk() {
                 byte1 = byte1 | (bit_low << ( SW - x -1 ))
                 byte2 = byte2 | (bit_high << ( SW - x -1  ))
             }
-            console.log(byte1.toString(2))
-            console.log(byte2.toString(2))
+            //console.log(byte1.toString(2))
+            //console.log(byte2.toString(2))
             output.push('0x'+('0'+byte1.toString(16)).slice(-2))
             output.push('0x'+('0'+byte2.toString(16)).slice(-2))
         }
@@ -168,7 +215,8 @@ function load() {
             if (data.stack) map_stack = data.stack
             update_sprite_canvas() //first!
             setTimeout(update_map_canvas, 100)
-            setTimeout(update_stack, 100)
+            setTimeout(cycle_map, 100)
+            setTimeout(update_stack, 200)
             // we get the returned data
         }
     

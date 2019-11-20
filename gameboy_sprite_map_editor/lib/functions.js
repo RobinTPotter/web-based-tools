@@ -1,24 +1,16 @@
 
 function main() {
 
-
-
-
     add_new_sprite()
     current_sprite_index = current_sprites.length-1
 
+
     setup_controls_ui()
 
+    horizontal_panel = d3.select('body').append('div').style('overflow','hidden')
+
     setup_sprite_ui()    
-
-    d3.select('body').append('br')
-    d3.select('body').append('br')
-
-
     setup_map_ui()
-
-
-
 
     setup_map_ui_action()
     setup_sprite_ui_action()
@@ -29,7 +21,6 @@ function main() {
 
     sprite_list_canvas = document.getElementById("tiles");
     colour_list_canvas = document.getElementById("colours");
-    
 
     initialize_map()
 
@@ -44,8 +35,6 @@ function main() {
     sprite = current_sprites[current_sprite_index]
     add_new_sprite()
     update_tiles_source()
-    d3.select('body').append('br')
-    d3.select('body').append('br')
 
 }
 
@@ -61,6 +50,5 @@ function call_layout() {
     current_sprite_canvas.style('left',`${sprite_offset_x}px`)
     current_map_canvas.style('top',`${map_offset_y}px`)
     current_map_canvas.style('left',`${map_offset_x}px`)
-
 
 }

@@ -59,12 +59,22 @@ function popup_open(stuff) {
     popup_inside.style('height', `${main_height - 2*margin}px`)
 
     popup_button_area.style('position','absolute')
-    popup_button_area.style('top', `${ main_height - 28 }px`)
+    popup_button_area.style('top', `${ main_height - 27 }px`)
     popup_button_area.style('left', `${ margin }px`)
 
 
     popup_inside.node().value = stuff
     popup.style('visibility','visible')
+    popup_inside.node().focus()
+
+    popup.node().onkeydown = function(evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 27) {
+            popup_close()
+        }
+    };
+
+
 }
 
 function popup_copy() {

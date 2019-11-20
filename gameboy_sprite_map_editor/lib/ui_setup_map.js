@@ -2,7 +2,7 @@
 
 function setup_map_ui() {
 
-    map_panel = d3.select('body').append('div')
+    map_panel = horizontal_panel.append('div').style('float','left').style('margin','10px')
 
     map_panel.append('h2').text('Map Design')
 
@@ -87,7 +87,9 @@ function setup_map_ui() {
 
         map_panel.append('br')
 
-        stack_panel = d3.select('body').append('div')
+        map_panel.append('h2').text('Map Stack')
+
+        stack_panel = map_panel.append('div')
 
         stack_canvas = stack_panel.append('canvas')
             .attr('id','stack_canvas')
@@ -114,6 +116,13 @@ function setup_map_ui() {
         .attr('type','button')
         .on('click',cycle_map)
         .attr('value','cycle')
+
+
+        stack_panel.append('input')
+        .attr('id','export_stack')
+        .attr('type','button')
+        .on('click',export_stack)
+        .attr('value','export')
 
 
 

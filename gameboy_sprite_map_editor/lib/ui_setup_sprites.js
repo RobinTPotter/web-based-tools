@@ -1,7 +1,7 @@
     
 function setup_sprite_ui() {
 
-    sprite_panel = d3.select('body').append('div')
+    sprite_panel = horizontal_panel.append('div').style('float','left').style('margin','10px')
 
     sprite_panel.append('h2').text('Sprite Design')
 
