@@ -87,9 +87,10 @@ function setup_map_ui() {
 
         map_panel.append('br')
 
-        map_panel.append('h2').text('Map Stack')
 
         stack_panel = map_panel.append('div')
+
+        stack_panel.append('h2').text('Map Stack')
 
         stack_canvas = stack_panel.append('canvas')
             .attr('id','stack_canvas')

@@ -178,7 +178,7 @@ function setup_sprite_ui() {
         })
 
 
-        sprite_panel.append('br')
+        sprite_panel.append('hr')
 
         tes_canvas_3x3 = sprite_panel.append('canvas')
         .attr('id','tes_canvas_3x3')

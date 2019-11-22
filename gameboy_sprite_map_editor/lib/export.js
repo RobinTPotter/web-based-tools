@@ -229,3 +229,37 @@ function load() {
 
 
 }
+
+function paste() {
+var stuff = JSON.stringify(
+    {"file": filename.node().value,
+    "sprites": current_sprites,
+    "map": current_map,
+    "stack": map_stack }
+    )
+
+    stuff = stuff.replace(/\}\]/g,'}]\n',true)
+    stuff = stuff.replace(/("[^"]*":\[)/g,'\n$1',true)
+
+    popup_open(stuff)
+    
+        popup_ok_button.on('click',function() {
+
+            var data = JSON.parse(popup_inside.node().value)
+                        console.log(data)
+                        console.log('sprites 1 was ', current_sprites[0])
+    if (data.sprites) current_sprites = data.sprites
+    console.log('sprites 1 is ', current_sprites[0])
+    if (data.map) current_map = data.map
+    if (data.stack) map_stack = data.stack
+    update_sprite_canvas() //first!
+    setTimeout(update_map_canvas, 100)
+    setTimeout(cycle_map, 100)
+    setTimeout(update_stack, 200)
+    setTimeout(call_layout, 200)
+
+    popup_close()
+})
+
+
+}

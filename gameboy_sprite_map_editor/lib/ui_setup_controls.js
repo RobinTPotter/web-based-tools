@@ -3,17 +3,6 @@ function setup_controls_ui() {
 
     var ui_controls = d3.select('body').append('div')
 
-    save_button = ui_controls.append('input')
-    .attr('id','save')
-    .attr('type','button')
-    .on('click', save)
-    .attr('value','save')
-
-    load_button = ui_controls.append('input')
-    .attr('id','load')
-    .attr('type','button')
-    .on('click', load)
-    .attr('value','load')
 
     panel_sprite_toggle = ui_controls.append('input')
     .attr('id','sprite_toggle')
@@ -57,6 +46,25 @@ function setup_controls_ui() {
 
     ui_controls.append('label').text('stack')
 
+
+
+    save_button = ui_controls.append('input')
+    .attr('id','save')
+    .attr('type','button')
+    .on('click', save)
+    .attr('value','save')
+
+    load_button = ui_controls.append('input')
+    .attr('id','load')
+    .attr('type','button')
+    .on('click', load)
+    .attr('value','load')
+
+    load_button = ui_controls.append('input')
+    .attr('id','paste')
+    .attr('type','button')
+    .on('click', paste)
+    .attr('value','paste')
 
 
 
