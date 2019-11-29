@@ -2,6 +2,7 @@
 function setup_sprite_ui() {
 
     sprite_panel = horizontal_panel.append('div').style('float','left').style('margin','10px')
+    sprite_panel.on('mousedown',function() { event.preventDefault ? event.preventDefault() : event.returnValue = false })
 
     sprite_panel.append('h2').text('Sprite Design')
 
@@ -195,7 +196,15 @@ function setup_sprite_ui() {
 
         sprite_panel.append('br')
 
-        sprite_panel.append('input').attr('type','number').attr('min',0).style('width','50px').attr('value',0).on('click',function(){
+        sprite_panel.append('input').attr('type','number').attr('min',0).style('width','50px').attr('value',0).on('click',function(d){
+            var v = d3.select(this).node().value
+            if (d3.event.offsetY < d3.event.srcElement.clientHeight/2) {
+                v++
+            } else {
+                v--
+            }
+            d3.select(this).node().value = v
+            console.log(d3.event.offsetY)
             tes_sprite_index = Number(d3.select(this).node().value)
             update_tiles_source()
         })

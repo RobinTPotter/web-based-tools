@@ -15,7 +15,7 @@ class StorageHandler(SimpleHTTPRequestHandler):
         if self.path == '/save':
             length = self.headers['content-length']
             data = self.rfile.read(int(length))
-            print(data)
+            #print(data)
             filename = json.loads(data)['file']
             with open(filename, 'w') as fh:
                 fh.write(data.decode())

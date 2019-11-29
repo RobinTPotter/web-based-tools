@@ -3,6 +3,7 @@
 function setup_map_ui() {
 
     map_panel = horizontal_panel.append('div').style('float','left').style('margin','10px')
+    map_panel.on('mousedown',function() { event.preventDefault ? event.preventDefault() : event.returnValue = false })
 
     map_panel.append('h2').text('Map Design')
 
@@ -38,6 +39,12 @@ function setup_map_ui() {
         //.style('top',`${offset_y-2}px`)
         //.style('posleftition',`${offset_x-2}`)
 
+    rad_sng = map_panel.append('input').attr('type','radio').attr('name','draw').attr('value','single').property('checked',true)
+    map_panel.append('span').text('single')
+    rad_dbl = map_panel.append('input').attr('type','radio').attr('name','draw').attr('value','double')
+    map_panel.append('span').text('double')
+    rad_qud = map_panel.append('input').attr('type','radio').attr('name','draw').attr('value','quad')
+    map_panel.append('span').text('quad')
 
     current_map_canvas = map_panel.append('canvas')
         .attr('id','current_map_canvas')
@@ -53,6 +60,22 @@ function setup_map_ui() {
             cell = current_map.filter(function(m,i) { if (m.x==cx & m.y==cy) return m })[0]          
             console.log(cx,cy,cell)
             cell.value=current_tile_index
+            if (rad_dbl.node().checked & current_tile_index<current_sprites.length) {
+                cell = current_map.filter(function(m,i) { if (m.x==cx & m.y==cy+1) return m })[0]          
+                console.log(cx,cy,cell)
+                cell.value=current_tile_index + 1
+            }
+            else if (rad_qud.node().checked & current_tile_index<(current_sprites.length-3)) {
+                cell = current_map.filter(function(m,i) { if (m.x==cx & m.y==cy+1) return m })[0]          
+                console.log(cx,cy,cell)
+                cell.value=current_tile_index + 1
+                cell = current_map.filter(function(m,i) { if (m.x==cx+1 & m.y==cy) return m })[0]          
+                console.log(cx,cy,cell)
+                cell.value=current_tile_index + 2
+                cell = current_map.filter(function(m,i) { if (m.x==cx+1 & m.y==cy+1) return m })[0]          
+                console.log(cx,cy,cell)
+                cell.value=current_tile_index + 3
+            }
             update_map_canvas()            
         })
         .on('mousemove', function() {

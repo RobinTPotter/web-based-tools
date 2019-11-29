@@ -58,3 +58,7 @@ var horizontal_panel
 var tes_canvas_2x2
 var tes_sprite_index = 0
 var tes_canvas_3x3
+
+var rad_sng
+var rad_dbl
+var rad_qud

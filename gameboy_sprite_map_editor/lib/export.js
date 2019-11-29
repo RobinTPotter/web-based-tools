@@ -251,8 +251,17 @@ var stuff = JSON.stringify(
     if (data.sprites) current_sprites = data.sprites
     console.log('sprites 1 is ', current_sprites[0])
     if (data.map) current_map = data.map
-    if (data.stack) map_stack = data.stack
+    if (data.stack) {
+        data.stack.forEach(function(mso) {
+            if (mso.map) {
+                current_map = mso.map
+                update_map_canvas()
+                push_map()
+            }
+        })
+    }
     update_sprite_canvas() //first!
+    
     setTimeout(update_map_canvas, 100)
     setTimeout(cycle_map, 100)
     setTimeout(update_stack, 200)

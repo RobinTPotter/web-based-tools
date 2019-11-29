@@ -7,7 +7,7 @@ function main() {
 
     setup_controls_ui()
 
-    horizontal_panel = d3.select('body').append('div').style('overflow','hidden')
+    horizontal_panel = d3.select('body').append('div').style('overflow','none')
 
     setup_sprite_ui()    
     setup_map_ui()
