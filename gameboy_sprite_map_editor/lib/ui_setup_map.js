@@ -119,6 +119,9 @@ function setup_map_ui() {
             .attr('id','stack_canvas')
             .attr('width',`${64}`)
             .attr('height',`${64}`)
+            .style('border','solid')
+            .style('border-width','1px')
+            //.style('position','1px')
         
         stack_panel.append('br')
         
@@ -148,7 +151,17 @@ function setup_map_ui() {
         .on('click',export_stack)
         .attr('value','export')
 
-
+        stack_canvas.on("mousedown", function() {
+            if (map_stack.map(function(m) { return JSON.stringify(m.map)}).indexOf(JSON.stringify(current_map))==-1) push_map()
+            mx=d3.event.offsetX
+            my=d3.event.offsetY
+            cx=Math.abs(Math.floor(mx/128))
+            cy=Math.abs(Math.floor(my/128))
+            console.log(cx,cy)
+                current_map = map_stack[cx].map
+                update_map_canvas()
+        })
 
         
+            
 }

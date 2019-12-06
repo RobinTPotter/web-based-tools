@@ -62,3 +62,5 @@ var tes_canvas_3x3
 var rad_sng
 var rad_dbl
 var rad_qud
+
+var stack_canvas_edge

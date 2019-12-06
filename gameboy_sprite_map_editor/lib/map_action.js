@@ -25,7 +25,7 @@ function update_map_canvas(callback) {
 function setup_map_ui_action() {
 
     //set up ui actions
-    d3.select('#tiles').on('mouseup', function() {
+    tiles_source.on('mouseup', function() {
         mx=d3.event.offsetX
         my=d3.event.offsetY
         cx=Math.abs(Math.floor(mx/32))
@@ -100,6 +100,8 @@ function update_stack() {
             ctx.drawImage(  tmp , 0, 0, CHO*W, CHO*H, m*128, 0, 128, 128 )
         }
     }
-console.log('update stack picture')
+
+    console.log('update stack picture')
+    call_layout()
 
 }

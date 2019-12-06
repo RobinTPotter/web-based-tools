@@ -51,4 +51,5 @@ function call_layout() {
     current_map_canvas.style('top',`${map_offset_y}px`)
     current_map_canvas.style('left',`${map_offset_x}px`)
 
+
 }

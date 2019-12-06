@@ -231,23 +231,23 @@ function load() {
 }
 
 function paste() {
-var stuff = JSON.stringify(
-    {"file": filename.node().value,
-    "sprites": current_sprites,
-    "map": current_map,
-    "stack": map_stack }
-    )
+    var stuff = JSON.stringify(
+        {"file": filename.node().value,
+            "sprites": current_sprites,
+            "map": current_map,
+            "stack": map_stack.map(function(m) { return { "map": m.map} })  
+        }
+        , null, 2
+        )
 
-    stuff = stuff.replace(/\}\]/g,'}]\n',true)
-    stuff = stuff.replace(/("[^"]*":\[)/g,'\n$1',true)
 
     popup_open(stuff)
     
-        popup_ok_button.on('click',function() {
+    popup_ok_button.on('click',function() {
 
-            var data = JSON.parse(popup_inside.node().value)
-                        console.log(data)
-                        console.log('sprites 1 was ', current_sprites[0])
+    var data = JSON.parse(popup_inside.node().value)
+    console.log(data)
+    console.log('sprites 1 was ', current_sprites[0])
     if (data.sprites) current_sprites = data.sprites
     console.log('sprites 1 is ', current_sprites[0])
     if (data.map) current_map = data.map
