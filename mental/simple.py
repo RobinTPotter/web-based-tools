@@ -16,13 +16,13 @@ class StorageHandler(SimpleHTTPRequestHandler):
     
     """A tweak to Simple Handler if POST to save then dangerously save data to file."""
     def do_GET(self):
-        print('started get')
+        self.log_message('started get')
         self.send_response(200)
         self.end_headers()
         output = str(template)
         output = output.replace('HERE_WWW','<br />'.join(things['www']))
         output = output.replace('HERE_EBI','<br />'.join(things['ebi']))
-        print('about to write')
+        self.log_message('about to write')
         self.wfile.write(output.encode())  
     
     def do_POST(self):
@@ -31,11 +31,14 @@ class StorageHandler(SimpleHTTPRequestHandler):
         length = int(self.headers['content-length'])
         data = self.rfile.read(length).decode().split('=')[-1]
         data = urllib.parse.unquote_plus(data.strip())
+        self.log_message(data)
         if len(data)>1:
             if route in things:
                 things[route].append(data)
-
-        self.do_GET()
+        
+        self.send_response(301)
+        self.send_header('Location','mental.html')
+        self.end_headers()
 
 
 server = HTTPServer(('', 12345), StorageHandler)
