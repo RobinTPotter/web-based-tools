@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""Simple subclass of http.server to action a POST to save file."""
+"""Simple subclass of http.server to action a POST then redirect to itself as GET."""
 
 print('open http://localhost:12345/mental.html')
 
@@ -9,10 +9,11 @@ from http.server import SimpleHTTPRequestHandler, HTTPServer
 
 things = {'www': [], 'ebi': [] }
 
+# template page
 with open('mental.html') as f:
     template = f.read()
 
-class StorageHandler(SimpleHTTPRequestHandler):
+class RubbishHandler(SimpleHTTPRequestHandler):
     
     """A tweak to Simple Handler if POST to save then dangerously save data to file."""
     def do_GET(self):
@@ -26,10 +27,13 @@ class StorageHandler(SimpleHTTPRequestHandler):
         self.wfile.write(output.encode())  
     
     def do_POST(self):
-        """If url is save, dump contnet to save.json."""
         route = self.path.split('?')[-1]
         length = int(self.headers['content-length'])
+        
+        # only one parameter comes through from a textarea
         data = self.rfile.read(length).decode().split('=')[-1]
+        
+        # remove all the encoding + %2C etc
         data = urllib.parse.unquote_plus(data.strip())
         self.log_message(data)
         if len(data)>1:
@@ -41,5 +45,5 @@ class StorageHandler(SimpleHTTPRequestHandler):
         self.end_headers()
 
 
-server = HTTPServer(('', 12345), StorageHandler)
+server = HTTPServer(('', 12345), RubbishHandler)
 server.serve_forever()
